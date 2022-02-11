@@ -1,25 +1,28 @@
-import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { FC } from 'react'
+import { Switch, Route, Router, RouterProps } from 'react-router-dom'
+import theme from './theme'
+import { ThemeProvider } from 'styled-components'
+import GlobalStyles from './globalStyles'
+import Login from './pages/Login'
+import CreateNewAccount from './pages/CreateNewAccount'
 
-function App() {
+interface AppProps extends RouterProps {
+  onSignIn?: () => void
+}
+
+const App: FC<AppProps> = ({ history, onSignIn }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Router history={history}>
+        <Switch>
+          <Route path="/register" component={CreateNewAccount} />
+          <Route path="/">
+            <Login onSignIn={onSignIn} />
+          </Route>
+        </Switch>
+      </Router>
+    </ThemeProvider>
   )
 }
 

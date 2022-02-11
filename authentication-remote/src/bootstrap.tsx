@@ -1,13 +1,33 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import { createMemoryHistory, createBrowserHistory, History } from 'history'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
-const remoteMount = (element: HTMLElement) => {
+interface RemoteMountProps {
+  initialPath?: string
+  defaultHistory?: History
+  onSignIn?: () => void
+  onNavigate?: () => void
+}
+
+const remoteMount = (
+  element: HTMLElement,
+  { onSignIn, onNavigate, defaultHistory, initialPath }: RemoteMountProps
+) => {
+  const history =
+    defaultHistory ||
+    createMemoryHistory({
+      initialEntries: [initialPath || '']
+    })
+
+  if (onNavigate) {
+    history.listen(onNavigate)
+  }
+
   ReactDOM.render(
     <React.StrictMode>
-      <App />
+      <App history={history} onSignIn={onSignIn} />
     </React.StrictMode>,
     element
   )
@@ -16,6 +36,16 @@ const remoteMount = (element: HTMLElement) => {
   // to log results (for example: reportWebVitals(console.log))
   // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
   reportWebVitals()
+
+  return {
+    onParentNavigate({ pathname: nextPathname }: { pathname: string }) {
+      const { pathname } = history.location
+
+      if (pathname !== nextPathname) {
+        history.push(nextPathname)
+      }
+    }
+  }
 }
 
 // If we are in development and in isolation,
@@ -24,7 +54,7 @@ if (process.env.NODE_ENV === 'development') {
   const devRoot = document.getElementById('authentication')
 
   if (devRoot) {
-    remoteMount(devRoot)
+    remoteMount(devRoot, { defaultHistory: createBrowserHistory() })
   }
 }
 

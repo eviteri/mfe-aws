@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 process.env.NODE_ENV = 'development'
 
 const { merge } = require('webpack-merge')
@@ -10,20 +9,20 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 
 const mfeConfig = {
   output: {
-    publicPath: 'http://localhost:8084/'
+    publicPath: 'http://localhost:8081/'
   },
   devServer: {
-    port: 8084,
+    port: 8081,
     historyApiFallback: {
       historyApiFallback: true
     }
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'accountManagement',
+      name: 'authentication',
       filename: 'remoteEntry.js',
       exposes: {
-        './AccountManagementIndex': './src/bootstrap'
+        './AuthenticationIndex': './src/bootstrap'
       },
       shared: packageJson.dependencies
     })
