@@ -1,14 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import { Router } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
+
+const history = createBrowserHistory()
 
 const remoteMount = (element: HTMLElement) => {
   ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
+    <Router history={history}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Router>,
     element
   )
 
@@ -21,7 +26,7 @@ const remoteMount = (element: HTMLElement) => {
 // If we are in development and in isolation,
 // call mount immediately
 if (process.env.NODE_ENV === 'development') {
-  const devRoot = document.getElementById('container')
+  const devRoot = document.getElementById('root')
 
   if (devRoot) {
     remoteMount(devRoot)

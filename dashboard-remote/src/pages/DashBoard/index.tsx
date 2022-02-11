@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useRef } from 'react'
-import Chart from 'chart.js/auto'
 import { H1 } from 'syf-component-library/ui/typography'
 import { buildLineChart, buildBarChart } from './helpers'
 

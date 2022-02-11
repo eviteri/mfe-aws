@@ -1,13 +1,13 @@
 process.env.NODE_ENV = 'development'
 
 const { merge } = require('webpack-merge')
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 const webpackConfigDev = require('react-scripts/config/webpack.config')(
   'development'
 )
 const packageJson = require('../package.json')
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
-const mfeConfig = {
+const devConfig = {
   output: {
     publicPath: 'http://localhost:8081/'
   },
@@ -19,13 +19,13 @@ const mfeConfig = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'authentication',
+      name: 'auth',
       filename: 'remoteEntry.js',
       exposes: {
-        './AuthenticationIndex': './src/bootstrap'
+        './AuthIndex': './src/bootstrap'
       },
       shared: packageJson.dependencies
     })
   ]
 }
-module.exports = merge(webpackConfigDev, mfeConfig)
+module.exports = merge(webpackConfigDev, devConfig)

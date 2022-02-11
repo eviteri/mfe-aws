@@ -18,6 +18,10 @@ interface LoginProps {
   onSignIn?: () => void
 }
 
+function uniqueID() {
+  return Math.floor(Math.random() * Date.now())
+}
+
 const Login: FC<LoginProps> = ({ onSignIn }) => {
   const [userId, setUserId] = useState('')
   const [password, setPassword] = useState('')
@@ -28,6 +32,12 @@ const Login: FC<LoginProps> = ({ onSignIn }) => {
 
     // Mocking API
     await setTimeout(() => {
+      const sessionId = uniqueID()
+      const accessToken = uniqueID()
+
+      sessionStorage.setItem('session_id', sessionId.toString())
+      sessionStorage.setItem('access_token', accessToken.toString())
+
       if (onSignIn) {
         onSignIn()
       }
