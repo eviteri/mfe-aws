@@ -10,20 +10,20 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 
 const mfeConfig = {
   output: {
-    publicPath: 'http://localhost:8084/'
+    publicPath: 'http://localhost:8082/'
   },
   devServer: {
-    port: 8084,
+    port: 8082,
     historyApiFallback: {
       historyApiFallback: true
     }
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'accountManagement',
+      name: 'dashboard',
       filename: 'remoteEntry.js',
       exposes: {
-        './AccountManagementIndex': './src/bootstrap'
+        './DashboardIndex': './src/bootstrap'
       },
       shared: packageJson.dependencies
     })
