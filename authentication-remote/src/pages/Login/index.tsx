@@ -43,6 +43,7 @@ const Login: FC<LoginProps> = ({ onSignIn }) => {
       }
       setIsLoading(false)
     }, 2000)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Clean up

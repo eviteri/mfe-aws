@@ -100,3 +100,10 @@ export const LinkHeader = styled(H5)`
   margin: 0;
   padding: 0;
 `
+
+export const NavWrapper = styled.nav`
+  background-color: #e7edfd;
+  padding: 0 8%;
+  display: flex;
+  height: 50px;
+`

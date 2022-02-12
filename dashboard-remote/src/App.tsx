@@ -6,10 +6,6 @@ import GlobalStyles from './globalStyles'
 import Dashboard from './pages/DashBoard'
 import LearningCenter from './pages/LearningCenter'
 
-interface AppProps extends RouterProps {
-  onSignIn?: () => void
-}
-
 const App: FC<RouterProps> = ({ history }) => {
   return (
     <ThemeProvider theme={theme}>

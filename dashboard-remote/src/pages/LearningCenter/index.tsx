@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { H1 } from 'syf-component-library/ui/typography'
 import { VideoGallery, VideoWrapper, Iframe } from './subComponents'
 
 interface YoutubeEmbedProps {

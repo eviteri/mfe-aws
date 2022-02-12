@@ -20,6 +20,7 @@ const Main = styled.div<{ isSignedIn: boolean }>`
   max-width: 1440px;
   width: 100%;
   min-height: calc(100vh - 200px);
+  padding: 1% 2.5%;
 `
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
     if (isSignedIn) {
       history.push('/dashboard')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignedIn])
 
   useEffect(() => {
@@ -48,7 +50,7 @@ function App() {
         <Switch>
           {isSignedIn ? (
             <>
-              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/" component={Dashboard} />
             </>
           ) : (
             <>

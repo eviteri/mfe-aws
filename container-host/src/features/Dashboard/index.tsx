@@ -20,6 +20,7 @@ export const Dashboard: FC = () => {
     })
 
     history.listen(onParentNavigate)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <div ref={ref} />
