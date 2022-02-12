@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createMemoryHistory, createBrowserHistory, History } from 'history'
+import { QueryClient } from 'react-query'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 interface RemoteMountProps {
   initialPath?: string
+  queryClient?: QueryClient
   defaultHistory?: History
   onSignIn?: () => void
   onNavigate?: () => void
@@ -13,7 +15,13 @@ interface RemoteMountProps {
 
 const remoteMount = (
   element: HTMLElement,
-  { onSignIn, onNavigate, defaultHistory, initialPath }: RemoteMountProps
+  {
+    onSignIn,
+    onNavigate,
+    defaultHistory,
+    initialPath,
+    queryClient
+  }: RemoteMountProps
 ) => {
   const history =
     defaultHistory ||
@@ -21,13 +29,15 @@ const remoteMount = (
       initialEntries: [initialPath || '']
     })
 
+  const appQueryClient = queryClient || new QueryClient()
+
   if (onNavigate) {
     history.listen(onNavigate)
   }
 
   ReactDOM.render(
     <React.StrictMode>
-      <App history={history} onSignIn={onSignIn} />
+      <App history={history} onSignIn={onSignIn} queryClient={appQueryClient} />
     </React.StrictMode>,
     element
   )
@@ -54,7 +64,9 @@ if (process.env.NODE_ENV === 'development') {
   const devRoot = document.getElementById('authentication')
 
   if (devRoot) {
-    remoteMount(devRoot, { defaultHistory: createBrowserHistory() })
+    remoteMount(devRoot, {
+      defaultHistory: createBrowserHistory()
+    })
   }
 }
 

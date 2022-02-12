@@ -1,18 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createMemoryHistory, createBrowserHistory, History } from 'history'
+import { QueryClient } from 'react-query'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 interface RemoteMountProps {
   initialPath?: string
+  queryClient?: QueryClient
   onNavigate?: () => void
   defaultHistory?: History
 }
 
 const remoteMount = (
   element: Element,
-  { onNavigate, defaultHistory, initialPath }: RemoteMountProps
+  { onNavigate, defaultHistory, initialPath, queryClient }: RemoteMountProps
 ) => {
   const history =
     defaultHistory ||
@@ -20,13 +22,15 @@ const remoteMount = (
       initialEntries: [initialPath || '']
     })
 
+  const appQueryClient = queryClient || new QueryClient()
+
   if (onNavigate) {
     history.listen(onNavigate)
   }
 
   ReactDOM.render(
     <React.StrictMode>
-      <App history={history} />
+      <App history={history} queryClient={appQueryClient} />
     </React.StrictMode>,
     element
   )

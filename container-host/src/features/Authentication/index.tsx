@@ -2,12 +2,14 @@ import React, { useRef, useEffect, FC } from 'react'
 import { useHistory } from 'react-router-dom'
 // @ts-ignore
 import { remoteMount } from 'auth-mf/AuthIndex'
+import { QueryClient } from 'react-query'
 
 interface AuthAppProps {
   onSignIn: () => void
+  queryClient: QueryClient
 }
 
-export const AuthApp: FC<AuthAppProps> = ({ onSignIn }) => {
+export const AuthApp: FC<AuthAppProps> = ({ onSignIn, queryClient }) => {
   const ref = useRef(null)
   const history = useHistory()
 
@@ -21,7 +23,8 @@ export const AuthApp: FC<AuthAppProps> = ({ onSignIn }) => {
           history.push(nextPathname)
         }
       },
-      onSignIn
+      onSignIn,
+      queryClient
     })
 
     history.listen(onParentNavigate)

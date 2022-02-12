@@ -2,8 +2,13 @@ import React, { useRef, useEffect, FC } from 'react'
 import { useHistory } from 'react-router-dom'
 // @ts-ignore
 import { remoteMount } from 'dashboard-mf/DashboardIndex'
+import { QueryClient } from 'react-query'
 
-export const Dashboard: FC = () => {
+interface DashboardProps {
+  queryClient: QueryClient
+}
+
+export const Dashboard: FC<DashboardProps> = ({ queryClient }) => {
   const ref = useRef(null)
   const history = useHistory()
 
@@ -16,7 +21,8 @@ export const Dashboard: FC = () => {
         if (pathname !== nextPathname) {
           history.push(nextPathname)
         }
-      }
+      },
+      queryClient
     })
 
     history.listen(onParentNavigate)

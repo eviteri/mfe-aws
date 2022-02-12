@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {
-  Switch,
-  Route,
-  Redirect,
-  useHistory,
-  useLocation
-} from 'react-router-dom'
+import React, { useCallback, useState } from 'react'
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import theme from './theme'
 import styled, { ThemeProvider } from 'styled-components'
 import GlobalStyles from './globalStyles'
@@ -13,6 +7,8 @@ import Header from './ui/molecules/Header'
 import Footer from './ui/molecules/Footer'
 import Authentication from './features/Authentication'
 import Dashboard from './features/Dashboard'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const Main = styled.div<{ isSignedIn: boolean }>`
   background-color: ${({ isSignedIn }) => (isSignedIn ? 'white' : 'inherit')};
@@ -23,47 +19,55 @@ const Main = styled.div<{ isSignedIn: boolean }>`
   padding: 1% 2.5%;
 `
 
+// Create a client
+const queryClient = new QueryClient()
+
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false)
   const history = useHistory()
-  const { pathname } = useLocation()
 
-  useEffect(() => {
-    if (isSignedIn) {
-      history.push('/dashboard')
-    }
+  const handleLogin = useCallback(() => {
+    setIsSignedIn(true)
+    history.push('/dashboard')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSignedIn])
+  }, [])
 
-  useEffect(() => {
-    if (pathname === '/logout') {
-      sessionStorage.clear()
-      setIsSignedIn(false)
-    }
-  }, [pathname])
+  const handleLogOut = useCallback(() => {
+    setIsSignedIn(false)
+    history.push('/dashboard')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Header isUserLoggedIn={isSignedIn} />
-      <Main isSignedIn={isSignedIn}>
-        <Switch>
-          {isSignedIn ? (
-            <>
-              <Route path="/" component={Dashboard} />
-            </>
-          ) : (
-            <>
-              <Route path="/">
-                <Authentication onSignIn={() => setIsSignedIn(true)} />
-              </Route>
-              <Redirect to="/" />
-            </>
-          )}
-        </Switch>
-      </Main>
-      <Footer />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Header isUserLoggedIn={isSignedIn} logout={handleLogOut} />
+        <Main isSignedIn={isSignedIn}>
+          <Switch>
+            {isSignedIn ? (
+              <>
+                <Route path="/">
+                  <Dashboard queryClient={queryClient} />
+                </Route>
+              </>
+            ) : (
+              <>
+                <Route path="/">
+                  <Authentication
+                    onSignIn={handleLogin}
+                    queryClient={queryClient}
+                  />
+                </Route>
+                <Redirect to="/" />
+              </>
+            )}
+          </Switch>
+        </Main>
+        <Footer />
+      </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
 

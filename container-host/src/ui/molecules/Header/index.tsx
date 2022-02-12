@@ -16,6 +16,7 @@ import {
 
 interface HeaderProps {
   isUserLoggedIn: boolean
+  logout: () => void
 }
 
 const links: Array<NavItem> = [
@@ -24,12 +25,16 @@ const links: Array<NavItem> = [
     relPath: '/dashboard'
   },
   {
+    name: 'News',
+    relPath: '/news'
+  },
+  {
     name: 'Learning Center',
     relPath: '/learning'
   }
 ]
 
-const Header: FC<HeaderProps> = ({ isUserLoggedIn }) => {
+const Header: FC<HeaderProps> = ({ isUserLoggedIn, logout }) => {
   return (
     <>
       <HeaderWrapper>
@@ -42,7 +47,7 @@ const Header: FC<HeaderProps> = ({ isUserLoggedIn }) => {
           <HeaderElementsContainer>
             <HeaderItem>
               <LinkContainer>
-                <CustomLink to="/logout" onClick={() => {}}>
+                <CustomLink to="/logout" onClick={logout}>
                   <LinkHeader as="span">Logout</LinkHeader>
                 </CustomLink>
               </LinkContainer>

@@ -18,3 +18,11 @@ export const StyledButton = styled(Button)`
   padding: 0;
   margin: 0;
 `
+
+export const ErrorWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  flex-direction: column;
+`
