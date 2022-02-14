@@ -1,5 +1,3 @@
-import { CLTheme } from 'syf-component-library/defaultTheme'
-
 export const colors = {
   error: '#C63527',
   lightError: '#F9EBE9',
@@ -34,7 +32,7 @@ export const colors = {
   mercury: '#FAFAFA'
 }
 
-const theme: CLTheme = {
+const theme = {
   body: '#333333',
   link: '#34657F',
   icon: '#34657F',

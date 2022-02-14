@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
 import { useQueryClient } from 'react-query'
-import styled from 'styled-components'
-import { H1, Body } from 'syf-component-library/ui/typography'
-
-const PostItem = styled.div`
-  margin-bottom: 30px;
-`
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 interface PostDetails {
   userId: number
   id: number
@@ -20,22 +19,47 @@ const News: FC = () => {
 
   if (!posts.length) {
     return (
-      <div role="list">
-        <PostItem role="listitem">
-          <H1>There are not posts</H1>
-          <Body>Need to fetch latest posts</Body>
-        </PostItem>
-      </div>
+      <Card sx={{ minWidth: 275, marginBottom: '2%' }}>
+        <CardContent>
+          <Typography variant="h4" gutterBottom component="div" role="heading">
+            There are not posts
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Need to fetch latest posts
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card>
     )
   }
 
   return (
     <div role="list">
       {posts.slice(0, 10).map(post => (
-        <PostItem key={post.id} role="listitem">
-          <H1>{post.title}</H1>
-          <Body>{post.body}</Body>
-        </PostItem>
+        <Card
+          sx={{ minWidth: 275, marginBottom: '2%' }}
+          key={post.id}
+          role="listitem"
+        >
+          <CardContent>
+            <Typography
+              variant="h4"
+              gutterBottom
+              component="div"
+              role="heading"
+            >
+              {post.title}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              {post.body}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
       ))}
     </div>
   )

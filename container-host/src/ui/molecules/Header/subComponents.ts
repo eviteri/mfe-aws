@@ -1,25 +1,18 @@
 import styled from 'styled-components'
-import query from 'syf-component-library/const/mediaQueries'
 import { colors } from '../../../theme'
-import synchronyDesktopLogo from 'ui/assets/synchrony_logo_RGB_reversed.png'
-import synchronyMobileLogo from 'ui/assets/synchrony_pillars_RGB.png'
-import { H5 } from 'syf-component-library/ui/typography'
-import Link from 'syf-component-library/ui/atoms/Link'
+import appLogo from '../../assets/eviteri-reverse.png'
 
 export const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 91px;
+  height: 70px;
   padding: 0 8%;
   background-color: ${colors.steelGrey};
   box-shadow: 0 2px 12px 0 ${colors.mediumGrey};
   color: ${colors.lightestGrey};
   * {
     box-sizing: border-box;
-  }
-  @media ${query.lessThanMedium} {
-    height: 80px;
   }
 `
 
@@ -32,11 +25,7 @@ export const LogoContainer = styled.div`
 export const SiteLogo = styled.img`
   display: inline-block;
   width: 258px;
-  content: url(${synchronyDesktopLogo});
-  @media ${query.lessThanMedium} {
-    width: 28px;
-    content: url(${synchronyMobileLogo});
-  }
+  content: url(${appLogo});
 `
 
 export const HeaderElementsContainer = styled.div`
@@ -50,24 +39,13 @@ export const HeaderItem = styled.div`
   padding: 0 25px;
   min-width: 100px;
   position: relative;
-  @media ${query.lessThanMedium} {
-    padding: 0;
-    min-width: 85px;
-    justify-content: center;
-    :last-child {
-      min-width: 55px;
-      justify-content: flex-end;
-    }
+
+  a,
+  a:visited {
+    color: white;
+    text-decoration: none;
   }
-  @media ${query.lessThanSmall} {
-    padding: 0;
-    min-width: 60px;
-    justify-content: center;
-    :last-child {
-      min-width: 40px;
-      justify-content: flex-end;
-    }
-  }
+
   // pipe separator
   &:not(:last-child):after {
     content: '';
@@ -79,31 +57,31 @@ export const HeaderItem = styled.div`
   }
 `
 
-export const LinkContainer = styled.div`
-  display: flex;
-`
-
-export const CustomLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0;
-  margin: 0;
-  text-decoration: none;
-  &,
-  &:visited {
-    color: ${colors.white};
-  }
-`
-
-export const LinkHeader = styled(H5)`
-  margin: 0;
-  padding: 0;
-`
-
-export const NavWrapper = styled.nav`
-  background-color: #e7edfd;
+export const Navigation = styled.div`
+  background-color: #1875d1;
   padding: 0 8%;
-  display: flex;
-  height: 50px;
+  ul {
+    display: flex;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    li {
+      a {
+        color: white;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 0 15px;
+        &.active {
+          background: #3885d3;
+          font-weight: bold;
+        }
+      }
+    }
+  }
 `

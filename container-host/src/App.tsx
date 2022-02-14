@@ -11,11 +11,10 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 const Main = styled.div<{ isSignedIn: boolean }>`
-  background-color: ${({ isSignedIn }) => (isSignedIn ? 'white' : 'inherit')};
   margin: auto;
   max-width: 1440px;
   width: 100%;
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 158px);
   padding: 1% 2.5%;
 `
 

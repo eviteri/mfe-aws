@@ -1,25 +1,25 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
-import { NavItem } from 'syf-component-library/typings/navigation'
-import NavigationTabs from 'syf-component-library/ui/patterns/NavigationTabs'
+import { NavLink, Link } from 'react-router-dom'
+import Button from '@mui/material/Button'
+import Avatar from '@mui/material/Avatar'
 import {
   HeaderWrapper,
   LogoContainer,
   SiteLogo,
   HeaderElementsContainer,
   HeaderItem,
-  LinkContainer,
-  LinkHeader,
-  CustomLink,
-  NavWrapper
+  Navigation
 } from './subComponents'
+import avatarImg from '../../assets/avatar.jpeg'
+import LogoutIcon from '@mui/icons-material/Logout'
+import Stack from '@mui/material/Stack'
 
 interface HeaderProps {
   isUserLoggedIn: boolean
   logout: () => void
 }
 
-const links: Array<NavItem> = [
+const links = [
   {
     name: 'Dashboard',
     relPath: '/dashboard'
@@ -40,25 +40,41 @@ const Header: FC<HeaderProps> = ({ isUserLoggedIn, logout }) => {
       <HeaderWrapper>
         <LogoContainer>
           <Link to={isUserLoggedIn ? '/dashboard' : '/'}>
-            <SiteLogo alt="Synchrony Logo" data-testid="syf-logo" />
+            <SiteLogo alt="Synchrony Logo" />
           </Link>
         </LogoContainer>
         {isUserLoggedIn && (
           <HeaderElementsContainer>
             <HeaderItem>
-              <LinkContainer>
-                <CustomLink to="/logout" onClick={logout}>
-                  <LinkHeader as="span">Logout</LinkHeader>
-                </CustomLink>
-              </LinkContainer>
+              <Button
+                variant="text"
+                onClick={logout}
+                sx={{ color: 'white', textTransform: 'capitalize' }}
+              >
+                <Stack direction="row" spacing={2}>
+                  <span>Logout</span>
+                  <LogoutIcon />
+                </Stack>
+              </Button>
+            </HeaderItem>
+            <HeaderItem>
+              <Avatar alt="Travis Howard" src={avatarImg} />
             </HeaderItem>
           </HeaderElementsContainer>
         )}
       </HeaderWrapper>
       {isUserLoggedIn && (
-        <NavWrapper>
-          <NavigationTabs navItems={links} />
-        </NavWrapper>
+        <Navigation>
+          <ul>
+            {links.map(link => {
+              return (
+                <li id={link.relPath} key={link.relPath}>
+                  <NavLink to={link.relPath}>{link.name}</NavLink>
+                </li>
+              )
+            })}
+          </ul>
+        </Navigation>
       )}
     </>
   )

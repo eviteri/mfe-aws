@@ -1,16 +1,15 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
-import { Card } from 'syf-component-library/ui/atoms/Card'
-import { Link, SyfLoader, Textfield } from 'syf-component-library/ui/atoms'
-import { Inline, Inset } from 'syf-component-library/ui/spacing'
-import {
-  PageWrapper,
-  PageContentWrapper,
-  StyledButton,
-  ErrorWrapper
-} from 'pages/Login/subComponents'
-import { useQuery } from 'react-query'
 import axios from 'axios'
-import { Body } from 'syf-component-library/ui/typography'
+import { useQuery } from 'react-query'
+import { useHistory } from 'react-router-dom'
+import TextField from '@mui/material/TextField'
+import Stack from '@mui/material/Stack'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import Alert from '@mui/material/Alert'
+import CircularProgress from '@mui/material/CircularProgress'
 
 interface LoginProps {
   onSignIn?: () => void
@@ -27,7 +26,11 @@ function usePosts({ onSignIn }: LoginProps) {
     },
     {
       enabled: false,
-      onSuccess: () => onSignIn()
+      onSuccess: () => {
+        if (onSignIn) {
+          onSignIn()
+        }
+      }
     }
   )
 }
@@ -37,6 +40,8 @@ const Login: FC<LoginProps> = ({ onSignIn }) => {
   const [userId, setUserId] = useState('')
   const [password, setPassword] = useState('')
 
+  const history = useHistory()
+
   // Clean up
   useEffect(() => {
     return () => {
@@ -45,92 +50,82 @@ const Login: FC<LoginProps> = ({ onSignIn }) => {
     }
   }, [])
 
-  if (error) {
-    return (
-      <PageWrapper>
-        <PageContentWrapper>
-          <Card title="Error">
-            <Inset all="medium">
-              <ErrorWrapper>
-                <Body>Something went wrong when trying to login 😮 </Body>
-                <Inset all="medium">
-                  <StyledButton
-                    buttonType="primary"
-                    onClick={() => refetch()}
-                    type="button"
-                    disabled={isFetching}
-                  >
-                    {isFetching && (
-                      <>
-                        <SyfLoader />
-                        <Inline size="base" />
-                      </>
-                    )}
-                    Try again
-                  </StyledButton>
-                </Inset>
-              </ErrorWrapper>
-            </Inset>
-          </Card>
-        </PageContentWrapper>
-      </PageWrapper>
-    )
-  }
-
   return (
-    <PageWrapper>
-      <PageContentWrapper>
-        <Card title="Login">
-          <Inset all="medium">
-            <Textfield
-              id="user-name"
-              autoCapitalize="none"
-              name="user-name"
-              placeholder="User Name"
-              type="text"
-              value={userId}
-              width="100%"
-              onChange={(e: SyntheticEvent) =>
-                setUserId((e.target as HTMLInputElement).value)
-              }
-            />
-          </Inset>
-          <Inset all="medium">
-            <Textfield
-              id="user-password"
-              autoCapitalize="none"
-              name="user-password"
-              placeholder="Password"
-              type="password"
-              value={password}
-              width="100%"
-              onChange={(e: SyntheticEvent) =>
-                setPassword((e.target as HTMLInputElement).value)
-              }
-            />
-          </Inset>
-          <Inset all="medium">
-            <StyledButton
-              buttonType="primary"
-              onClick={() => refetch()}
-              type="button"
-              disabled={isFetching}
-            >
-              {isFetching && (
-                <>
-                  <SyfLoader />
-                  <Inline size="base" />
-                </>
-              )}
-              Login
-            </StyledButton>
-          </Inset>
-          <Inset all="medium">
-            <Link to="/register">Create New Account</Link>
-          </Inset>
-        </Card>
-      </PageContentWrapper>
-    </PageWrapper>
+    <>
+      {error && (
+        <Stack sx={{ width: '100%' }} spacing={2}>
+          <Alert severity="error">This is an error alert — check it out!</Alert>
+        </Stack>
+      )}
+
+      <Grid
+        container
+        spacing={2}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={12} sm={8} md={6} lg={6}>
+          <Paper elevation={3} sx={{ p: 2, marginTop: '8%' }}>
+            <Stack spacing={2}>
+              <Typography
+                variant="h4"
+                gutterBottom
+                component="div"
+                role="heading"
+              >
+                Login
+              </Typography>
+              <TextField
+                id="user-name"
+                label="User Name"
+                variant="outlined"
+                fullWidth
+                value={userId}
+                onChange={(e: SyntheticEvent) =>
+                  setUserId((e.target as HTMLInputElement).value)
+                }
+              />
+              <TextField
+                id="user-password"
+                type="password"
+                label="Password"
+                variant="outlined"
+                fullWidth
+                value={password}
+                onChange={(e: SyntheticEvent) =>
+                  setPassword((e.target as HTMLInputElement).value)
+                }
+              />
+              <Button
+                variant="contained"
+                onClick={() => refetch()}
+                disabled={isFetching}
+                size="large"
+              >
+                Login
+                {isFetching && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      marginLeft: '2%'
+                    }}
+                  />
+                )}
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => history.push('/register')}
+                size="large"
+              >
+                Create New Account
+              </Button>
+            </Stack>
+          </Paper>
+        </Grid>
+      </Grid>
+    </>
   )
 }
+
 export default Login

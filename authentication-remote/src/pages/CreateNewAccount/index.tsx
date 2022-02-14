@@ -6,14 +6,13 @@ import React, {
   useState
 } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Card } from 'syf-component-library/ui/atoms/Card'
-import { SyfLoader, Textfield } from 'syf-component-library/ui/atoms'
-import { Inline, Inset } from 'syf-component-library/ui/spacing'
-import {
-  PageWrapper,
-  PageContentWrapper,
-  StyledButton
-} from '../Login/subComponents'
+import TextField from '@mui/material/TextField'
+import Stack from '@mui/material/Stack'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const CreateNewAccount: FC = () => {
   const [firstName, setFirstName] = useState('')
@@ -47,94 +46,92 @@ const CreateNewAccount: FC = () => {
   }, [])
 
   return (
-    <PageWrapper>
-      <PageContentWrapper>
-        <Card title="Create New Account">
-          <Inset all="medium">
-            <Textfield
+    <Grid
+      container
+      spacing={2}
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid item xs={12} sm={8} md={6} lg={6}>
+        <Paper elevation={3} sx={{ p: 2, marginTop: '8%' }}>
+          <Stack spacing={2}>
+            <Typography
+              variant="h4"
+              gutterBottom
+              component="div"
+              role="heading"
+            >
+              Create New Account
+            </Typography>
+            <TextField
               id="user-first-name"
-              autoCapitalize="none"
-              name="user-first-name"
-              placeholder="First Name"
-              type="text"
+              label="First Name"
+              variant="outlined"
+              fullWidth
               value={firstName}
-              width="100%"
               onChange={(e: SyntheticEvent) =>
                 setFirstName((e.target as HTMLInputElement).value)
               }
             />
-          </Inset>
-          <Inset all="medium">
-            <Textfield
+            <TextField
               id="user-last-name"
-              autoCapitalize="none"
-              name="user-last-name"
-              placeholder="Last Name"
-              type="text"
+              label="Last Name"
+              variant="outlined"
+              fullWidth
               value={lastName}
-              width="100%"
               onChange={(e: SyntheticEvent) =>
                 setLastName((e.target as HTMLInputElement).value)
               }
             />
-          </Inset>
-          <Inset all="medium">
-            <Textfield
+            <TextField
               id="user-name"
-              autoCapitalize="none"
-              name="user-name"
-              placeholder="User Name"
-              type="text"
+              label="User Name"
+              variant="outlined"
+              fullWidth
               value={userId}
-              width="100%"
               onChange={(e: SyntheticEvent) =>
                 setUserId((e.target as HTMLInputElement).value)
               }
             />
-          </Inset>
-          <Inset all="medium">
-            <Textfield
+            <TextField
               id="user-password"
-              autoCapitalize="none"
-              name="user-password"
-              placeholder="Password"
               type="password"
+              label="Password"
+              variant="outlined"
+              fullWidth
               value={password}
-              width="100%"
               onChange={(e: SyntheticEvent) =>
                 setPassword((e.target as HTMLInputElement).value)
               }
             />
-          </Inset>
-
-          <Inset all="medium">
-            <StyledButton
-              buttonType="primary"
+            <Button
+              variant="contained"
               onClick={registerHandler}
-              type="button"
               disabled={isLoading}
+              size="large"
             >
-              {isLoading && (
-                <>
-                  <SyfLoader />
-                  <Inline size="base" />
-                </>
-              )}
               Register
-            </StyledButton>
-          </Inset>
-          <Inset all="medium">
-            <StyledButton
-              buttonType="secondary"
+              {isLoading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    marginLeft: '2%'
+                  }}
+                />
+              )}
+            </Button>
+            <Button
+              variant="outlined"
               onClick={() => history.push('/')}
-              type="button"
+              size="large"
             >
               Cancel
-            </StyledButton>
-          </Inset>
-        </Card>
-      </PageContentWrapper>
-    </PageWrapper>
+            </Button>
+          </Stack>
+        </Paper>
+      </Grid>
+    </Grid>
   )
 }
 export default CreateNewAccount
