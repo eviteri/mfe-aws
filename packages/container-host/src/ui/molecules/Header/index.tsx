@@ -33,7 +33,7 @@ const links = [
     relPath: '/learning'
   }
 ]
-// This is a test
+
 const Header: FC<HeaderProps> = ({ isUserLoggedIn, logout }) => {
   return (
     <>
