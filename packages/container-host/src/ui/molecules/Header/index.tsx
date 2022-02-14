@@ -34,6 +34,7 @@ const links = [
   }
 ]
 
+// Added comment
 const Header: FC<HeaderProps> = ({ isUserLoggedIn, logout }) => {
   return (
     <>
