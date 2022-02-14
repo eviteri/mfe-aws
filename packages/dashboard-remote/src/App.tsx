@@ -10,6 +10,7 @@ interface AppProps extends RouterProps {
   queryClient: QueryClient
 }
 
+// Testing dashboard pipeline
 const App: FC<AppProps> = ({ history, queryClient }) => {
   return (
     <QueryClientProvider client={queryClient}>
