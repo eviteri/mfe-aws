@@ -18,7 +18,6 @@ const Main = styled.div<{ isSignedIn: boolean }>`
   padding: 1% 2.5%;
 `
 
-// Create a client
 const queryClient = new QueryClient()
 
 function App() {
