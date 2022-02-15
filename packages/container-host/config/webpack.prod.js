@@ -2,6 +2,7 @@ process.env.NODE_ENV = 'production'
 
 const { merge } = require('webpack-merge')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const packageJson = require('../package.json')
 const webpackConfigProd = require('react-scripts/config/webpack.config')(
   'production'
@@ -16,6 +17,9 @@ const prodConfig = {
     publicPath: '/container/latest/'
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html'
+    }),
     new ModuleFederationPlugin({
       name: 'container',
       remotes: {
