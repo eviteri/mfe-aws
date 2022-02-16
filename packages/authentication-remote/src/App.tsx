@@ -10,7 +10,6 @@ interface AppProps extends RouterProps {
   queryClient: QueryClient
 }
 
-// Testing auth pipeline
 const App: FC<AppProps> = ({ history, onSignIn, queryClient }) => {
   return (
     <QueryClientProvider client={queryClient}>
