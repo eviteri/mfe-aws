@@ -10,6 +10,7 @@ interface AppProps extends RouterProps {
   queryClient: QueryClient
 }
 
+//
 const App: FC<AppProps> = ({ history, onSignIn, queryClient }) => {
   return (
     <QueryClientProvider client={queryClient}>
