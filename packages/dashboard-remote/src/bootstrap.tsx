@@ -43,14 +43,12 @@ const remoteMount = (
   }
 }
 
-// If we are in development and in isolation,
+// If we are in isolation,
 // call mount immediately
-if (process.env.NODE_ENV === 'development') {
-  const devRoot = document.getElementById('dashboard')
+const devRoot = document.getElementById('dashboard')
 
-  if (devRoot) {
-    remoteMount(devRoot, { defaultHistory: createBrowserHistory() })
-  }
+if (devRoot) {
+  remoteMount(devRoot, { defaultHistory: createBrowserHistory() })
 }
 
 export { remoteMount }
