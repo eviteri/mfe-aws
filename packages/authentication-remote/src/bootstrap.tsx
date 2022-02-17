@@ -4,24 +4,31 @@ import { createMemoryHistory, createBrowserHistory, History } from 'history'
 import { QueryClient } from 'react-query'
 import App from './App'
 
-interface RemoteMountProps {
+interface ParentNavigateProps {
+  pathname: string
+}
+
+interface AuthMountProps {
+  element: HTMLElement
   initialPath?: string
   queryClient?: QueryClient
   defaultHistory?: History
   onSignIn?: () => void
-  onNavigate?: () => void
+  onNavigate?: (args: ParentNavigateProps) => void
 }
 
-const remoteMount = (
-  element: HTMLElement,
-  {
-    onSignIn,
-    onNavigate,
-    defaultHistory,
-    initialPath,
-    queryClient
-  }: RemoteMountProps
-) => {
+type AuthMountReturnType = {
+  onParentNavigate: (args: ParentNavigateProps) => void
+}
+
+const authRemoteMount = ({
+  element,
+  onSignIn,
+  onNavigate,
+  defaultHistory,
+  initialPath,
+  queryClient
+}: AuthMountProps): AuthMountReturnType => {
   const history =
     defaultHistory ||
     createMemoryHistory({
@@ -40,7 +47,7 @@ const remoteMount = (
   )
 
   return {
-    onParentNavigate({ pathname: nextPathname }: { pathname: string }) {
+    onParentNavigate({ pathname: nextPathname }: ParentNavigateProps) {
       const { pathname } = history.location
 
       if (pathname !== nextPathname) {
@@ -55,9 +62,10 @@ const remoteMount = (
 const devRoot = document.getElementById('authentication')
 
 if (devRoot) {
-  remoteMount(devRoot, {
+  authRemoteMount({
+    element: devRoot,
     defaultHistory: createBrowserHistory()
   })
 }
 
-export { remoteMount }
+export default authRemoteMount

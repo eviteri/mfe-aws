@@ -4,17 +4,29 @@ import { createMemoryHistory, createBrowserHistory, History } from 'history'
 import { QueryClient } from 'react-query'
 import App from './App'
 
-interface RemoteMountProps {
-  initialPath?: string
-  queryClient?: QueryClient
-  onNavigate?: () => void
-  defaultHistory?: History
+interface ParentNavigateProps {
+  pathname: string
 }
 
-const remoteMount = (
-  element: Element,
-  { onNavigate, defaultHistory, initialPath, queryClient }: RemoteMountProps
-) => {
+interface DashboardMountProps {
+  element: HTMLElement
+  initialPath?: string
+  queryClient?: QueryClient
+  defaultHistory?: History
+  onNavigate?: (args: ParentNavigateProps) => void
+}
+
+type DashboardMountReturnType = {
+  onParentNavigate: (args: ParentNavigateProps) => void
+}
+
+const dashboardRemoteMount = ({
+  element,
+  onNavigate,
+  defaultHistory,
+  initialPath,
+  queryClient
+}: DashboardMountProps): DashboardMountReturnType => {
   const history =
     defaultHistory ||
     createMemoryHistory({
@@ -48,7 +60,10 @@ const remoteMount = (
 const devRoot = document.getElementById('dashboard')
 
 if (devRoot) {
-  remoteMount(devRoot, { defaultHistory: createBrowserHistory() })
+  dashboardRemoteMount({
+    element: devRoot,
+    defaultHistory: createBrowserHistory()
+  })
 }
 
-export { remoteMount }
+export default dashboardRemoteMount
