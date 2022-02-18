@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { createMemoryHistory, createBrowserHistory, History } from 'history'
 import { QueryClient } from 'react-query'
 import App from './App'
+import './typings/shared.decl.d'
 
 interface ParentNavigateProps {
   pathname: string

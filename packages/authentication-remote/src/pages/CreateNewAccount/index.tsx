@@ -13,6 +13,7 @@ import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress'
+import { routes as appRoutes } from 'shared-mf/SharedIndex'
 
 const CreateNewAccount: FC = () => {
   const [firstName, setFirstName] = useState('')
@@ -28,7 +29,7 @@ const CreateNewAccount: FC = () => {
 
     // Mocking API
     await setTimeout(() => {
-      history.push('/')
+      history.push(appRoutes.home)
       setIsLoading(false)
     }, 2000)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,7 +124,7 @@ const CreateNewAccount: FC = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() => history.push('/')}
+              onClick={() => history.push(appRoutes.home)}
               size="large"
             >
               Cancel

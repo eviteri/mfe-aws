@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
 import CircularProgress from '@mui/material/CircularProgress'
+import { routes as appRoutes } from 'shared-mf/SharedIndex'
 
 interface LoginProps {
   onSignIn?: () => void
@@ -115,7 +116,7 @@ const Login: FC<LoginProps> = ({ onSignIn }) => {
               </Button>
               <Button
                 variant="outlined"
-                onClick={() => history.push('/register')}
+                onClick={() => history.push(appRoutes.register)}
                 size="large"
               >
                 Create New Account

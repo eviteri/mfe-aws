@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { Switch, Route, Router, RouterProps } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { routes as appRoutes } from 'shared-mf/SharedIndex'
 
 const CreateNewAccountLazy = React.lazy(
   () => import('./pages/CreateNewAccount')
@@ -19,8 +20,8 @@ const App: FC<AppProps> = ({ history, onSignIn, queryClient }) => {
       <Router history={history}>
         <React.Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <Route path="/register" component={CreateNewAccountLazy} />
-            <Route path="/">
+            <Route path={appRoutes.register} component={CreateNewAccountLazy} />
+            <Route path={appRoutes.login}>
               <LoginLazy onSignIn={onSignIn} />
             </Route>
           </Switch>
