@@ -1,4 +1,4 @@
-import { AppRoutes } from '../typings/rotes'
+import { AppRoutes } from '../typings/routes'
 
 export const routes: AppRoutes = {
   home: '/',
