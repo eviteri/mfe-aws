@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { Switch, Route, Router, RouterProps } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { routes as appRoutes } from 'shared-lib/rootShared'
 
 const DashboardLazy = React.lazy(() => import('./pages/DashBoard'))
 const NewsLazy = React.lazy(() => import('./pages/News'))
@@ -17,9 +18,9 @@ const App: FC<AppProps> = ({ history, queryClient }) => {
       <Router history={history}>
         <React.Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <Route path="/dashboard" component={DashboardLazy} />
-            <Route path="/news" component={NewsLazy} />
-            <Route path="/learning" component={LearningCenterLazy} />
+            <Route path={appRoutes.dashboard} component={DashboardLazy} />
+            <Route path={appRoutes.news} component={NewsLazy} />
+            <Route path={appRoutes.learning} component={LearningCenterLazy} />
           </Switch>
         </React.Suspense>
       </Router>

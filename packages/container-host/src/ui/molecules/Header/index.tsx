@@ -13,6 +13,7 @@ import {
 import avatarImg from '../../assets/avatar.jpeg'
 import LogoutIcon from '@mui/icons-material/Logout'
 import Stack from '@mui/material/Stack'
+import { routes as appRoutes } from 'shared-lib/rootShared'
 
 interface HeaderProps {
   isUserLoggedIn: boolean
@@ -22,15 +23,15 @@ interface HeaderProps {
 const links = [
   {
     name: 'Dashboard',
-    relPath: '/dashboard'
+    relPath: appRoutes.dashboard
   },
   {
     name: 'News',
-    relPath: '/news'
+    relPath: appRoutes.news
   },
   {
     name: 'Learning Center',
-    relPath: '/learning'
+    relPath: appRoutes.learning
   }
 ]
 
@@ -39,7 +40,7 @@ const Header: FC<HeaderProps> = ({ isUserLoggedIn, logout }) => {
     <>
       <HeaderWrapper>
         <LogoContainer>
-          <Link to={isUserLoggedIn ? '/dashboard' : '/'}>
+          <Link to={isUserLoggedIn ? appRoutes.dashboard : appRoutes.home}>
             <SiteLogo alt="Synchrony Logo" />
           </Link>
         </LogoContainer>

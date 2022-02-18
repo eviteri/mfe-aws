@@ -10,7 +10,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
 import CircularProgress from '@mui/material/CircularProgress'
-import { routes as appRoutes } from 'shared-mf/SharedIndex'
+import { routes as appRoutes } from 'shared-lib/rootShared'
 
 interface LoginProps {
   onSignIn?: () => void

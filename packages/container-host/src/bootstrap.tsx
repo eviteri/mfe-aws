@@ -1,3 +1,5 @@
+import './typings/authentication-remote/index.decl.d'
+import './typings/dashboard-remote/index.decl.d'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'

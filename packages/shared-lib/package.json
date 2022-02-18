@@ -1,6 +1,9 @@
 {
-  "name": "shared",
-  "version": "0.1.0",
+  "name": "@eviteri/shared-mfe-lib",
+  "author": "Eloy Viteri",
+  "description": "Shared library for MicroFrontEnds with Module Federation ",
+  "version": "1.0.0",
+  "license": "ISC",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -17,14 +20,18 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-query": "^3.34.14",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.0",
     "typescript": "^4.5.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "mfe": "webpack serve --config config/webpack.dev.js",
-    "build": "webpack --config config/webpack.prod.js",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "npm run prebuild && npm run build:compile && npm run build:copyAssets",
+    "build:compile": "tsc --build tsconfig.prod.json",
+    "build:copyAssets": "cp -r src/assets dist/ && cp package.json dist/ && cp README.md dist/",
+    "dist": "cd dist && npm publish",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -33,6 +40,9 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "browserslist": {
     "production": [
@@ -47,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "webpack-cli": "^4.9.2"
   }
 }

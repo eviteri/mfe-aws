@@ -1,26 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createMemoryHistory, createBrowserHistory, History } from 'history'
+import { createMemoryHistory, createBrowserHistory } from 'history'
 import { QueryClient } from 'react-query'
 import App from './App'
-import './typings/shared.decl.d'
-
-interface ParentNavigateProps {
-  pathname: string
-}
-
-interface AuthMountProps {
-  element: HTMLElement
-  initialPath?: string
-  queryClient?: QueryClient
-  defaultHistory?: History
-  onSignIn?: () => void
-  onNavigate?: (args: ParentNavigateProps) => void
-}
-
-type AuthMountReturnType = {
-  onParentNavigate: (args: ParentNavigateProps) => void
-}
+import {
+  AuthMountProps,
+  AuthParentNavigateProps,
+  AuthMountReturnType
+} from 'shared-lib/rootShared'
 
 const authRemoteMount = ({
   element,
@@ -48,7 +35,7 @@ const authRemoteMount = ({
   )
 
   return {
-    onParentNavigate({ pathname: nextPathname }: ParentNavigateProps) {
+    onParentNavigate({ pathname: nextPathname }: AuthParentNavigateProps) {
       const { pathname } = history.location
 
       if (pathname !== nextPathname) {

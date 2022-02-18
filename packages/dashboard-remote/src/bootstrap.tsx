@@ -1,24 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createMemoryHistory, createBrowserHistory, History } from 'history'
+import { createMemoryHistory, createBrowserHistory } from 'history'
 import { QueryClient } from 'react-query'
+import {
+  DashboardMountReturnType,
+  DashboardMountProps
+} from 'shared-lib/rootShared'
 import App from './App'
-
-interface ParentNavigateProps {
-  pathname: string
-}
-
-interface DashboardMountProps {
-  element: HTMLElement
-  initialPath?: string
-  queryClient?: QueryClient
-  defaultHistory?: History
-  onNavigate?: (args: ParentNavigateProps) => void
-}
-
-type DashboardMountReturnType = {
-  onParentNavigate: (args: ParentNavigateProps) => void
-}
 
 const dashboardRemoteMount = ({
   element,

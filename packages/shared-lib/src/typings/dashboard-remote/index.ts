@@ -1,6 +1,7 @@
 import { QueryClient } from 'react-query'
+import { History } from 'history'
 
-export interface ParentNavigateProps {
+export interface DahsboardParentNavigateProps {
   pathname: string
 }
 
@@ -9,11 +10,11 @@ export interface DashboardMountProps {
   initialPath?: string
   queryClient?: QueryClient
   defaultHistory?: History
-  onNavigate?: (args: ParentNavigateProps) => void
+  onNavigate?: (args: DahsboardParentNavigateProps) => void
 }
 
 export type DashboardMountReturnType = {
-  onParentNavigate: (args: ParentNavigateProps) => void
+  onParentNavigate: (args: DahsboardParentNavigateProps) => void
 }
 
 export type DashboardMountFunction = (

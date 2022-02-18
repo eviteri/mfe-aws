@@ -21,9 +21,6 @@ const devConfig = {
     new ModuleFederationPlugin({
       name: 'auth',
       filename: 'remoteEntry.js',
-      remotes: {
-        'shared-mf': 'shared@http://localhost:8083/remoteEntry.js'
-      },
       exposes: {
         './AuthIndex': './src/bootstrap'
       },

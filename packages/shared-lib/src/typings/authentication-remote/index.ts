@@ -1,6 +1,7 @@
 import { QueryClient } from 'react-query'
+import { History } from 'history'
 
-export interface ParentNavigateProps {
+export interface AuthParentNavigateProps {
   pathname: string
 }
 
@@ -10,11 +11,11 @@ export interface AuthMountProps {
   queryClient?: QueryClient
   defaultHistory?: History
   onSignIn?: () => void
-  onNavigate?: (args: ParentNavigateProps) => void
+  onNavigate?: (args: AuthParentNavigateProps) => void
 }
 
 export type AuthMountReturnType = {
-  onParentNavigate: (args: ParentNavigateProps) => void
+  onParentNavigate: (args: AuthParentNavigateProps) => void
 }
 
 export type AuthMountFunction = (args: AuthMountProps) => AuthMountReturnType

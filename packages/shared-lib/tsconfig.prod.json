@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "outDir": "dist/",
+    "declaration": true,
+    "module": "commonjs",
+    "jsx": "react"
+  },
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.stories.js",
+    "**/*.stories.mdx",
+    "**/*.stories.tsx"
+  ]
+}

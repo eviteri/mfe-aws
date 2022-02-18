@@ -7,6 +7,7 @@ import Header from './ui/molecules/Header'
 import Footer from './ui/molecules/Footer'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { routes as appRoutes } from 'shared-lib/rootShared'
 
 const AuthenticationLazy = React.lazy(() => import('./features/Authentication'))
 const DashboardLazy = React.lazy(() => import('./features/Dashboard'))
@@ -47,19 +48,19 @@ function App() {
             <Switch>
               {isSignedIn ? (
                 <>
-                  <Route path="/">
+                  <Route path={appRoutes.home}>
                     <DashboardLazy queryClient={queryClient} />
                   </Route>
                 </>
               ) : (
                 <>
-                  <Route path="/">
+                  <Route path={appRoutes.home}>
                     <AuthenticationLazy
                       onSignIn={handleLogin}
                       queryClient={queryClient}
                     />
                   </Route>
-                  <Redirect to="/" />
+                  <Redirect to={appRoutes.home} />
                 </>
               )}
             </Switch>

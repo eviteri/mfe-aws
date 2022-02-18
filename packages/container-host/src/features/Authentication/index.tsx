@@ -1,10 +1,10 @@
-import '../../typings/authentication-remote/index.decl.d'
 import React, { useRef, useEffect, FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { QueryClient } from 'react-query'
-import { AuthMountFunction } from '../../typings/authentication-remote/index'
+import { AuthMountFunction } from 'shared-lib/rootShared'
 import authRemoteMount from 'auth-mf/AuthIndex'
 
+// We do this to have ts intelligence
 const authMountFunction = authRemoteMount as AuthMountFunction
 
 interface AuthAppProps {
