@@ -5,10 +5,11 @@ import styled, { ThemeProvider } from 'styled-components'
 import GlobalStyles from './globalStyles'
 import Header from './ui/molecules/Header'
 import Footer from './ui/molecules/Footer'
-import Authentication from './features/Authentication'
-import Dashboard from './features/Dashboard'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+
+const AuthenticationLazy = React.lazy(() => import('./features/Authentication'))
+const DashboardLazy = React.lazy(() => import('./features/Dashboard'))
 
 const Main = styled.div<{ isSignedIn: boolean }>`
   margin: auto;
@@ -42,25 +43,27 @@ function App() {
         <GlobalStyles />
         <Header isUserLoggedIn={isSignedIn} logout={handleLogOut} />
         <Main isSignedIn={isSignedIn}>
-          <Switch>
-            {isSignedIn ? (
-              <>
-                <Route path="/">
-                  <Dashboard queryClient={queryClient} />
-                </Route>
-              </>
-            ) : (
-              <>
-                <Route path="/">
-                  <Authentication
-                    onSignIn={handleLogin}
-                    queryClient={queryClient}
-                  />
-                </Route>
-                <Redirect to="/" />
-              </>
-            )}
-          </Switch>
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              {isSignedIn ? (
+                <>
+                  <Route path="/">
+                    <DashboardLazy queryClient={queryClient} />
+                  </Route>
+                </>
+              ) : (
+                <>
+                  <Route path="/">
+                    <AuthenticationLazy
+                      onSignIn={handleLogin}
+                      queryClient={queryClient}
+                    />
+                  </Route>
+                  <Redirect to="/" />
+                </>
+              )}
+            </Switch>
+          </React.Suspense>
         </Main>
         <Footer />
       </ThemeProvider>

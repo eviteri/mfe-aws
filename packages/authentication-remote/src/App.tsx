@@ -1,9 +1,12 @@
 import React, { FC } from 'react'
 import { Switch, Route, Router, RouterProps } from 'react-router-dom'
-import Login from './pages/Login'
-import CreateNewAccount from './pages/CreateNewAccount'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+
+const CreateNewAccountLazy = React.lazy(
+  () => import('./pages/CreateNewAccount')
+)
+const LoginLazy = React.lazy(() => import('./pages/Login'))
 
 interface AppProps extends RouterProps {
   onSignIn?: () => void
@@ -14,12 +17,14 @@ const App: FC<AppProps> = ({ history, onSignIn, queryClient }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router history={history}>
-        <Switch>
-          <Route path="/register" component={CreateNewAccount} />
-          <Route path="/">
-            <Login onSignIn={onSignIn} />
-          </Route>
-        </Switch>
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Route path="/register" component={CreateNewAccountLazy} />
+            <Route path="/">
+              <LoginLazy onSignIn={onSignIn} />
+            </Route>
+          </Switch>
+        </React.Suspense>
       </Router>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
