@@ -1,5 +1,5 @@
 {
-  "name": "@eviteri/shared-mfe-lib",
+  "name": "shared-mfe-lib",
   "author": "Eloy Viteri",
   "description": "Shared library for MicroFrontEnds with Module Federation ",
   "version": "1.0.0",
@@ -42,11 +42,7 @@
     ]
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/eviteri/mfe-aws.git"
+    "registry": "https://npm.pkg.github.com/@eviteri"
   },
   "browserslist": {
     "production": [
