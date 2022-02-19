@@ -24,10 +24,6 @@ jobs:
           scope: "@eviteri"
       - run: npm install
       - run: npm run build
-        with:
-          script: |
-            cd ./dist
-            ls -la
-        # - run: npm publish dist
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.ACCESS_TOKEN}}
