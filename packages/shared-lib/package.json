@@ -1,5 +1,5 @@
 {
-  "name": "@eviteri/shared-mfe-lib",
+  "name": "@eviteri/mfe-aws",
   "author": "Eloy Viteri",
   "description": "Shared library for MicroFrontEnds with Module Federation ",
   "version": "1.0.0",
