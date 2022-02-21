@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@eviteri/mfe-aws": "^1.0.0",
     "@mui/material": "^5.4.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
@@ -19,7 +20,6 @@
     "react-query": "^3.34.14",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.0",
-    "shared-lib": "file:lib/shared-0.1.0.tgz",
     "typescript": "^4.5.5",
     "web-vitals": "^2.1.4"
   },
