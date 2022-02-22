@@ -7,7 +7,7 @@ import Header from './ui/molecules/Header'
 import Footer from './ui/molecules/Footer'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { routes as appRoutes } from 'shared-lib/rootShared'
+import { routes as appRoutes } from '@eviteri/mfe-aws/dist/rootShared'
 
 const AuthenticationLazy = React.lazy(() => import('./features/Authentication'))
 const DashboardLazy = React.lazy(() => import('./features/Dashboard'))

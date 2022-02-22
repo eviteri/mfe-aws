@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { QueryClient } from 'react-query'
-import { AuthMountFunction } from 'shared-lib/rootShared'
+import { AuthMountFunction } from '@eviteri/mfe-aws/dist/rootShared'
 import authRemoteMount from 'auth-mf/AuthIndex'
 
 // We do this to have ts intelligence

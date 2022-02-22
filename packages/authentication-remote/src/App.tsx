@@ -4,8 +4,6 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { routes as appRoutes } from '@eviteri/mfe-aws/dist/rootShared'
 
-// 'shared-lib/rootShared'
-
 const CreateNewAccountLazy = React.lazy(
   () => import('./pages/CreateNewAccount')
 )

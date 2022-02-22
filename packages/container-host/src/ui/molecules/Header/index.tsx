@@ -13,7 +13,7 @@ import {
 import avatarImg from '../../assets/avatar.jpeg'
 import LogoutIcon from '@mui/icons-material/Logout'
 import Stack from '@mui/material/Stack'
-import { routes as appRoutes } from 'shared-lib/rootShared'
+import { routes as appRoutes } from '@eviteri/mfe-aws/dist/rootShared'
 
 interface HeaderProps {
   isUserLoggedIn: boolean

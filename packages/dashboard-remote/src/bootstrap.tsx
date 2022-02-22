@@ -5,7 +5,7 @@ import { QueryClient } from 'react-query'
 import {
   DashboardMountReturnType,
   DashboardMountProps
-} from 'shared-lib/rootShared'
+} from '@eviteri/mfe-aws/dist/rootShared'
 import App from './App'
 
 const dashboardRemoteMount = ({

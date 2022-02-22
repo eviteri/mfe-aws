@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { QueryClient } from 'react-query'
-import { DashboardMountFunction } from 'shared-lib/rootShared'
+import { DashboardMountFunction } from '@eviteri/mfe-aws/dist/rootShared'
 import dashboardRemoteMount from 'dashboard-mf/DashboardIndex'
 
 // We do this to have ts intelligence

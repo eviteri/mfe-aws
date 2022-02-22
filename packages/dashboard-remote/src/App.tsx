@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Switch, Route, Router, RouterProps } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { routes as appRoutes } from 'shared-lib/rootShared'
+import { routes as appRoutes } from '@eviteri/mfe-aws/dist/rootShared'
 
 const DashboardLazy = React.lazy(() => import('./pages/DashBoard'))
 const NewsLazy = React.lazy(() => import('./pages/News'))
