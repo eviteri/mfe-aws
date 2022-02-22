@@ -7,7 +7,7 @@ import {
   AuthMountProps,
   AuthParentNavigateProps,
   AuthMountReturnType
-} from 'shared-lib/rootShared'
+} from '@eviteri/mfe-aws/dist/rootShared'
 
 const authRemoteMount = ({
   element,

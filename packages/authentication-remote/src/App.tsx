@@ -2,7 +2,9 @@ import React, { FC } from 'react'
 import { Switch, Route, Router, RouterProps } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { routes as appRoutes } from 'shared-lib/rootShared'
+import { routes as appRoutes } from '@eviteri/mfe-aws/dist/rootShared'
+
+// 'shared-lib/rootShared'
 
 const CreateNewAccountLazy = React.lazy(
   () => import('./pages/CreateNewAccount')

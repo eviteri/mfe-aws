@@ -13,7 +13,7 @@ import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress'
-import { routes as appRoutes } from 'shared-lib/rootShared'
+import { routes as appRoutes } from '@eviteri/mfe-aws/dist/rootShared'
 
 const CreateNewAccount: FC = () => {
   const [firstName, setFirstName] = useState('')

@@ -10,7 +10,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
 import CircularProgress from '@mui/material/CircularProgress'
-import { routes as appRoutes } from 'shared-lib/rootShared'
+import { routes as appRoutes } from '@eviteri/mfe-aws/dist/rootShared'
 
 interface LoginProps {
   onSignIn?: () => void
