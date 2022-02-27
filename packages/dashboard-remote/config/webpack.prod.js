@@ -7,11 +7,13 @@ const webpackConfigProd = require('react-scripts/config/webpack.config')(
   'production'
 )
 
+const domain = process.env.PRODUCTION_DOMAIN
+
 const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: '/dashboard/latest/'
+    publicPath: `${domain}/dashboard/latest/`
   },
   plugins: [
     new ModuleFederationPlugin({
